@@ -1,0 +1,119 @@
+body{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    font-family: 'Indie Flower', cursive;
+    font-size: 50px; 
+    font-weight: 600;
+}
+.btn{
+    /* background-color: #04AA6D; */
+    border-radius: 10px;
+    width: 80px;
+    height: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+    border: solid 2px black;
+    cursor: pointer;
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+    font-weight: 700;
+}
+.control{
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+}
+.minMax{
+    display: flex;
+    justify-content: space-between;
+}
+.minMax p{
+    padding: 0;
+    margin: 0;
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+    font-weight: 700;
+}
+.currentSize{
+    display: flex;
+    justify-content: center;
+    font-family: 'Indie Flower', cursive;
+    /* font-size: 20px; */
+    font-weight: 700;
+}
+.currentSize p{
+    padding: 0;
+    margin: 0;
+}
+  /* The slider itself */
+  .slidecontainer{
+    margin: 3px 0;
+  }
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;  
+    background: black;
+    outline: none;
+    /* opacity: 0.7; */
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    padding: 0px 2px;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: black;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+  }
+/* End Slider */
+
+/* Sort Area*/
+.sortArea{
+    margin-top: 40px;
+    background-color: #1c1d20;
+    width: 50%;
+    height: 400px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    column-gap: 5px;
+}
+.col{
+    background-color: #acd6e6;
+    width: 5%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.col p{
+    margin: 0;
+    /* font-size: 16px; */
+    font-weight: 600;
+    color: #ffff;
+    font-family: 'Indie Flower', cursive;
+}
+
+/* End Sort Area*/
