@@ -6,13 +6,46 @@ const sortArea = document.getElementById('sortArea')
 
 let size = 5
 let arr = []
+let arrSteps = []
 let newColumn
 
 //Listeners
 randomizeBtn.addEventListener("click",randomElements)
 SloveBtn.addEventListener("click",sloveElements)
 arraySize.addEventListener('input',arraySizeControl)
-// 
+//
+function bubbleSort(array,size) {
+    arrSteps = []
+    for (let i = 0; i < size - 1; i++)
+    {
+      for (let j = 0; j < size - i - 1; j++)
+      {
+        if (array[j] > array[j + 1]) 
+        {
+          let temp = array[j];
+          array[j] = array[j + 1];
+          array[j + 1] = temp;
+          arrSteps.push({
+            index1:j,
+            index2:j+1,
+            swap:true,
+            finish: j === (size - i - 2)
+          });
+        }
+        else{
+            arrSteps.push({
+                index1:j,
+                index2:j+1,
+                swap:false,
+                finish: j === (size - i - 2)
+              });
+        }
+        
+      }
+      
+    }
+        return array
+  } 
 function generateRandomArray(length) {
     let arr = Array.from({length}, () => Math.floor(Math.random() * 100));
     return arr;
@@ -40,9 +73,38 @@ function randomElements(){
     console.log(sortArea.children[0]);
     
 }
+function applyMovement(arrSteps){
+    for(let i=0;i< arrSteps.length ;i++)
+    {
+        let {index1,index2,swap,finish} = arrSteps[i]
+        setTimeout(()=>{
+            sortArea.children[index1].style.backgroundColor = "#6de38a"
+            sortArea.children[index2].style.backgroundColor = "#6de38a"
+            if(swap)
+            {
+                sortArea.children[index1].before(sortArea.children[index2]);
+            }
+        },1000*i)
+        setTimeout(()=>{
+            sortArea.children[index1].style.backgroundColor = "#acd6e6"
+            sortArea.children[index2].style.backgroundColor = "#acd6e6"
+            if(finish)
+            {
+                sortArea.children[index2].style.backgroundColor = "#dfae4a"
+            }
+        },1100*i)
+
+    }
+    
+    sortArea.children[0].style.backgroundColor = "#dfae4a"
+
+
+}
 function sloveElements (){
     
-    // console.log(sortArea.append(newColumn))
+    console.log(bubbleSort(arr,size))
+    // console.log(arrSteps)
+    applyMovement(arrSteps)
 }
 
 function initFirstSort()
