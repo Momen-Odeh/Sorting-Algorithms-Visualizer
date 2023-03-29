@@ -73,26 +73,36 @@ function randomElements(){
     console.log(sortArea.children[0]);
     
 }
-function applyMovement(arrSteps){
+function delay(ms)
+{
+    return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve('success')
+        }, ms);
+    })
+}
+async function applyMovement(arrSteps){
     for(let i=0;i< arrSteps.length ;i++)
     {
         let {index1,index2,swap,finish} = arrSteps[i]
-        setTimeout(()=>{
+        // setTimeout(()=>{
             sortArea.children[index1].style.backgroundColor = "#6de38a"
             sortArea.children[index2].style.backgroundColor = "#6de38a"
             if(swap)
             {
                 sortArea.children[index1].before(sortArea.children[index2]);
             }
-        },1000*i)
-        setTimeout(()=>{
+            await delay(500)
+        // },1000*i)
+        // setTimeout(()=>{
             sortArea.children[index1].style.backgroundColor = "#acd6e6"
             sortArea.children[index2].style.backgroundColor = "#acd6e6"
             if(finish)
             {
                 sortArea.children[index2].style.backgroundColor = "#dfae4a"
             }
-        },1100*i)
+            await delay(500)
+        // },1100*i)
 
     }
     
