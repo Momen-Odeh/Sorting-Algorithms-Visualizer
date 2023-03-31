@@ -51,7 +51,7 @@ After the fifth and final iteration, the entire list is sorted in ascending orde
 ## Run Code
 We can show the pages of the project from github-pages 
 
-https://momen-odeh.github.io/Responsitive-Design-Living-the-simple-life/
+https://momen-odeh.github.io/Sorting-Algorithms-Visualizer/
 
 ## License
 Copyright © 2023 [Momen Odeh](https://github.com/Momen-Odeh)<br />
