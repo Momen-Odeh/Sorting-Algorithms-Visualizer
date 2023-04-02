@@ -1,18 +1,23 @@
 const arraySize = document.getElementById('arraySize')
+const arraySpeed = document.getElementById('arraySpeed')
 const arraySizeLabel = document.getElementById('arraySizeLabel')
+const arraySpeedLabel = document.getElementById('arraySpeedLabel')
 const randomizeBtn = document.getElementById('randomize-btn')
 const SloveBtn = document.getElementById('Slove-btn')
 const sortArea = document.getElementById('sortArea')
 
 let size = 5
+let speed = 1
 let arr = []
 let arrSteps = []
 let newColumn
+
 
 //Listeners
 randomizeBtn.addEventListener("click",randomElements)
 SloveBtn.addEventListener("click",sloveElements)
 arraySize.addEventListener('input',arraySizeControl)
+arraySpeed.addEventListener('input',arraySpeedControl)
 //
 function bubbleSort(array,size) {
     arrSteps = []
@@ -46,16 +51,96 @@ function bubbleSort(array,size) {
     }
         return array
   } 
+function selectionSort(array,size) {
+    arrSteps = []
+    // 
+    for (let step = 0; step < size - 1; step++) {
+        let min_idx = step;
+  
+        for (let i = step + 1; i < size; i++) {
+  
+          // To sort in descending order, change > to < in this line.
+          // Select the minimum element in each loop.
+          if (array[i] < array[min_idx]) {
+            min_idx = i;
+          }
+        }
+  
+        // put min at the correct position
+        arrSteps.push({
+            index1:step,
+            index2:min_idx,
+            swap:true,
+            finish: false
+          })
+        let temp = array[step];
+        array[step] = array[min_idx];
+        array[min_idx] = temp;
+      }
+    // 
+    return array
+}
+function insertionSort(array,size) {
+    arrSteps = []
+    // 
+    for (let step = 1; step < size; step++) {
+        
+        let key = array[step];
+        let j = step - 1;
+  
+        // Compare key with each element on the left of it until an element smaller than
+        // it is found.
+        // For descending order, change key<array[j] to key>array[j].
+        while (j >= 0 && key < array[j]) {
+          array[j + 1] = array[j];
+          arrSteps.push({
+            index1:j + 1,
+            index2:j,
+            swap:true,
+            finish: false
+          })
+          --j;
+        }
+  
+        // Place key at after the element just smaller than it.
+        array[j + 1] = key;
+        arrSteps.push({
+            index1:j + 1,
+            index2:step,
+            swap:true,
+            finish: false
+          })
+
+      }
+    // 
+    return array
+} 
 function generateRandomArray(length) {
     let arr = Array.from({length}, () => Math.floor(Math.random() * 100));
     return arr;
 }
+function arraySpeedControl(){
+    speed = (this.value/100).toFixed(2)
+    arraySpeedLabel.innerHTML = `Sorting Speed: X ${speed}  `
+}
 function arraySizeControl(){
     size = this.value
     arraySizeLabel.innerHTML = `Array Size: ${size}`
+    
 }
 
 function randomElements(){
+    if(size < 30){
+        sortArea.style.width="50%"
+        
+    }
+    else if(size < 50){
+        sortArea.style.width="75%"
+
+    }
+    else{
+        sortArea.style.width="95%"
+    }
     arr = generateRandomArray(size)
     console.log(sortArea.children.length);
     let index=sortArea.children.length;
@@ -92,7 +177,7 @@ async function applyMovement(arrSteps){
             {
                 sortArea.children[index1].before(sortArea.children[index2]);
             }
-            await delay(500)
+            await delay(400/speed)
         // },1000*i)
         // setTimeout(()=>{
             sortArea.children[index1].style.backgroundColor = "#acd6e6"
@@ -101,7 +186,7 @@ async function applyMovement(arrSteps){
             {
                 sortArea.children[index2].style.backgroundColor = "#dfae4a"
             }
-            await delay(500)
+            await delay(400/speed)
         // },1100*i)
 
     }
@@ -113,7 +198,6 @@ async function applyMovement(arrSteps){
 function sloveElements (){
     
     console.log(bubbleSort(arr,size))
-    // console.log(arrSteps)
     applyMovement(arrSteps)
 }
 
